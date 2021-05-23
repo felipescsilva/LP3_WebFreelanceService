@@ -1,4 +1,4 @@
-package DAO;
+package ec.ftt.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,8 +6,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Solicitacao;
-import model.User;
+import ec.ftt.model.User;
+
+
 
 public class UserDAO {
 	ConexaoDAO con;

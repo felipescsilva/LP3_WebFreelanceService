@@ -1,4 +1,4 @@
-package model;
+package ec.ftt.model;
 
 import java.time.LocalDate;
 
