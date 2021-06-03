@@ -55,9 +55,9 @@ public class AnuncioAPI extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		response.setStatus(418); //200 - OK - Padrão (Default)
 
 		String anuncioId = request.getParameter("anuncio-idAnuncio");
+		String CPF = request.getParameter("anuncio-cpf");
 		
 	    if(anuncioId != null) {
 	    	
@@ -80,6 +80,24 @@ public class AnuncioAPI extends HttpServlet {
 				response.setStatus(404);
 	    	}
 	    	
+	    } else if (CPF != null) {
+	    	
+	    	try {
+		    	AnuncioDAO anuncioDAO = new AnuncioDAO();
+		    	
+		    	List<Anuncio> anuncios = anuncioDAO.Consultar("CPF", CPF);
+		    	Gson gson = new Gson();
+		    	if (!anuncios.isEmpty())
+		    		response.getWriter().append(gson.toJson(anuncios));	
+		    	else {
+		    		response.getWriter().append("Nao existem anuncios cadastrados");
+					response.setStatus(404);
+		    	}
+		    	
+	    	} catch (Exception e) {
+	    		response.getWriter().append("Insira um valor válido.");
+				response.setStatus(404);
+	    	}
 	    } else {
 	    	
 	    	AnuncioDAO anuncioDAO = new AnuncioDAO();

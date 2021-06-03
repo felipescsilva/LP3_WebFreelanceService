@@ -55,10 +55,10 @@ public class SolicitacaoAPI extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		response.setStatus(418); //200 - OK - Padrão (Default)
 
 		String solicitacaoId = request.getParameter("solicitacao-idSolicitacao");
+		String CPF_User = request.getParameter("solicitacao-CPF_User");
+		String CPF_Anunciante = request.getParameter("solicitacao-CPF_Anunciante");
 		
 	    if(solicitacaoId != null) {
 	    	try {
@@ -79,7 +79,44 @@ public class SolicitacaoAPI extends HttpServlet {
 				response.setStatus(404);
 	    	}
 	    	
-	    } else {
+	    } else if (CPF_User != null) {
+	    	
+	    	try {
+	    			SolicitacaoDAO solicitacaoDAO = new SolicitacaoDAO();
+	    	
+	    			List<Solicitacao> solicitacoes = solicitacaoDAO.Consultar("CPF_User", CPF_User);
+	    			Gson gson = new Gson();
+	    	    	if (!solicitacoes.isEmpty())
+	    	    		response.getWriter().append(gson.toJson(solicitacoes));
+	    	    	else {
+	    				response.getWriter().append("Nao existem solicitacoes cadastradas");
+	    				response.setStatus(404);
+	    			}
+	    	} catch (Exception e) {
+	    		response.getWriter().append("Insira um valor válido.");
+				response.setStatus(404);
+	    	}
+	    	
+	    } else if (CPF_Anunciante != null) {
+	    	try {
+	    			SolicitacaoDAO solicitacaoDAO = new SolicitacaoDAO();
+	    	
+	    			List<Solicitacao> solicitacoes = solicitacaoDAO.Consultar("CPF_Anunciante", CPF_Anunciante);
+	    			Gson gson = new Gson();
+	    	    	if (!solicitacoes.isEmpty())
+	    	    		response.getWriter().append(gson.toJson(solicitacoes));
+	    	    	else {
+	    				response.getWriter().append("Nao existem solicitacoes cadastradas");
+	    				response.setStatus(404);
+	    			}
+	    	} catch (Exception e) {
+	    		response.getWriter().append("Insira um valor válido.");
+				response.setStatus(404);
+	    	}
+	    	
+	    }
+	    
+	    else {
 	    	
 	    	SolicitacaoDAO solicitacaoDAO = new SolicitacaoDAO();
 	    	List<Solicitacao> solicitacoes = solicitacaoDAO.Consultar();
@@ -114,6 +151,8 @@ public class SolicitacaoAPI extends HttpServlet {
 			solicitacao.setDataSolicitacao(localDate);
 			solicitacao.setStatus(request.getParameter("solicitacao-status"));
 			solicitacao.setValorTotal(Double.parseDouble(request.getParameter("solicitacao-valorTotal")));
+			solicitacao.setCPF_User(request.getParameter("solicitacao-CPF_User"));
+			solicitacao.setCPF_Anunciante(request.getParameter("solicitacao-CPF_Anunciante"));
 			
 			SolicitacaoDAO solicitacaoDAO = new SolicitacaoDAO();
 			
@@ -149,6 +188,8 @@ public class SolicitacaoAPI extends HttpServlet {
 			solicitacao.setDataSolicitacao(localDate);
 			solicitacao.setStatus(request.getParameter("solicitacao-status"));
 			solicitacao.setValorTotal(Double.parseDouble(request.getParameter("solicitacao-valorTotal")));
+			solicitacao.setCPF_User(request.getParameter("solicitacao-CPF_User"));
+			solicitacao.setCPF_Anunciante(request.getParameter("solicitacao-CPF_Anunciante"));
 			
 			SolicitacaoDAO solicitacaoDAO = new SolicitacaoDAO();
 			List<Solicitacao> listaSolicitacao = solicitacaoDAO.Consultar(solicitacao.getIdSolicitacao());

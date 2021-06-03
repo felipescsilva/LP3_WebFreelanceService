@@ -172,4 +172,43 @@ public class AnuncioDAO {
 		return lista;
 	}
 	
+	public List<Anuncio> Consultar(String campo, String valor){
+		List<Anuncio> lista = new ArrayList<Anuncio>();
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		try {
+			con = new ConexaoDAO();
+			String SQL = "exec dbo.sp_consulta tblAnuncio, ?, ?";
+			ps = con.getConexao().prepareStatement(SQL);
+			ps.setString(1, campo);
+			ps.setString(2, valor);
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				Anuncio anuncio = new Anuncio();
+	
+				anuncio.setCPF(rs.getString("CPF"));
+				anuncio.setDataAnuncio(LocalDate.parse(rs.getDate("DataAnuncio").toString()));
+				anuncio.setDescricao(rs.getString("Descricao"));
+				anuncio.setValorHora(rs.getDouble("ValorHora"));
+				anuncio.setIdAnuncio(rs.getInt("idAnuncio"));
+				
+				lista.add(anuncio);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 try{
+				 if (rs != null)
+					 rs.close();
+				 if(ps != null)
+					 ps.close();
+				 con.FecharConexao();
+			 }catch(Exception e){
+				 e.printStackTrace();
+			 }
+		}
+		
+		return lista;
+	}
 }

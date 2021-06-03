@@ -9,8 +9,10 @@ public class Solicitacao {
 	private LocalDate dataSolicitacao;
 	private String status;
 	private double valorTotal;
+	private String CPF_User;
+	private String CPF_Anunciante;
 	public Solicitacao(int idSolicitacao, int idAnuncio, int qtdHoras, LocalDate dataSolicitacao, String status,
-			double valorTotal) {
+			double valorTotal, String cPF_User, String cPF_Anunciante) {
 		super();
 		this.idSolicitacao = idSolicitacao;
 		this.idAnuncio = idAnuncio;
@@ -18,7 +20,26 @@ public class Solicitacao {
 		this.dataSolicitacao = dataSolicitacao;
 		this.status = status;
 		this.valorTotal = valorTotal;
+		CPF_User = cPF_User;
+		CPF_Anunciante = cPF_Anunciante;
 	}
+	
+	public String getCPF_User() {
+		return CPF_User;
+	}
+
+	public void setCPF_User(String cPF_User) {
+		CPF_User = cPF_User;
+	}
+
+	public String getCPF_Anunciante() {
+		return CPF_Anunciante;
+	}
+
+	public void setCPF_Anunciante(String cPF_Anunciante) {
+		CPF_Anunciante = cPF_Anunciante;
+	}
+
 	public Solicitacao() {
 		super();
 	}

@@ -57,7 +57,6 @@ public class UserAPI extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		response.setStatus(418); //200 - OK - Padrão (Default)
 
 		String userCPF = request.getParameter("user-cpf");
 		
