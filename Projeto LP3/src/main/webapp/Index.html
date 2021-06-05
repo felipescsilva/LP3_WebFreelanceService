@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h1>Teste</h1>
-</body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" href="css/login.css">
+        <title>Login Page</title>
+    </head>
+    <body>
+       <div class="login">
+	      <h1>Login</h1>
+    	        <input type="text" id="user-cpf" placeholder="CPF" onkeypress="$(this).mask('000.000.000-00');" required />
+                <input type="password" id="user-password" placeholder="Senha" required />
+                <button type="submit" class="btn btn-primary btn-block btn-large mb-1" onclick="sendLogin()">Entrar</button>
+            <a type="button" class="btn btn-success btn-block btn-large mt-1" href="adduser.html">Cadastre-se</a>
+        </div>
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="js/login.js"></script>
+    </body>
 </html>
